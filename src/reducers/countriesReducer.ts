@@ -1,17 +1,19 @@
 import { 
-    createSlice, 
-    PayloadAction 
+  createSlice, 
+  PayloadAction 
 }                       from '@reduxjs/toolkit'
 import { Countries }    from '../types/types'
 
 interface countriesReducer {
-  countries:  Countries[]
-  loading:    boolean
+  countries:      Countries[]
+  loading:        boolean
+  countriesCount: number
 }
 
 const initialState: countriesReducer = {
-  countries:  [],
-  loading:    false
+  countries:      [],
+  loading:        false,
+  countriesCount: 0
 }
 
 const countriesSlice = createSlice({
@@ -20,6 +22,9 @@ const countriesSlice = createSlice({
   reducers: {
     setCountries(state, { payload }: PayloadAction<Countries[]>) {
       state.countries = payload
+    },
+    setCountriesCount(state, { payload }: PayloadAction<number>) {
+      state.countriesCount = payload
     },
     setLoading(state, { payload } :PayloadAction<boolean>){
       state.loading = payload
@@ -45,7 +50,7 @@ const countriesSlice = createSlice({
     setCountriesSmallerThanLithuania(state){ 
       const lithuania = state.countries.find((item) => item.name === 'Lithuania')
       if(lithuania){
-        state.countries = [...state.countries].filter((item) => item.area < lithuania.area)
+        state.countries = state.countries.filter((item) => item.area < lithuania.area)
       }
     },
   },
@@ -53,6 +58,7 @@ const countriesSlice = createSlice({
 
 export const {
     setCountries,
+    setCountriesCount,
     setLoading,
     setAscendingCountries,
     setDescendingCountries,

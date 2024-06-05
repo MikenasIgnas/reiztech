@@ -1,9 +1,11 @@
-import { Action }   from "redux";
-import { Dispatch } from "react";
+import { Action }     from "redux";
+import { Dispatch }   from "react";
 import { 
   setCountries, 
   setLoading 
-}                   from "../reducers/countriesReducer";
+}                     from "../reducers/countriesReducer";
+import { Countries }  from "../types/types";
+import data           from "./data";
 
 const fetchData = async (url: string, timeout: number = 20000) => {
     const controller = new AbortController();
@@ -34,8 +36,9 @@ const handleFilterToggle = async (
     } else {
       try {
         dispatch(setLoading(true));
-        const res = await fetchData('https://restcountries.com/v2/all?fields=name,region,area');
-        dispatch(setCountries(res));
+        // todo change back
+        // const res = await fetchData('https://restcountries.com/v2/all?fields=name,region,area');
+        dispatch(setCountries(data));
         dispatch(setLoading(false));
       } catch (error) {
         if (error instanceof Error) {
@@ -46,5 +49,11 @@ const handleFilterToggle = async (
     setFilterState(!isFilterSelected);
 };
 
+const paginate = (array: Countries[],  page: number | null, limit: number | null) => {
 
-export { fetchData, handleFilterToggle }
+  if(page && limit){
+    return array.slice((page - 1) * limit, page * limit);
+  }
+}
+
+export { fetchData, handleFilterToggle, paginate }
