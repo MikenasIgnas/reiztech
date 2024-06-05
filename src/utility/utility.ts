@@ -21,7 +21,7 @@ const fetchData = async (url: string, timeout: number = 20000) => {
       const responseJson = await response.json()
       throw new Error(responseJson.message)
     }
-  }
+}
 
 const handleFilterToggle = async (
     isFilterSelected: boolean, 
@@ -29,11 +29,10 @@ const handleFilterToggle = async (
     filterAction:     () => Action, 
     dispatch:         Dispatch<Action>
   ) => {
-    if (isFilterSelected) {
+    if (!isFilterSelected) {
       dispatch(filterAction());
     } else {
       try {
-
         dispatch(setLoading(true));
         const res = await fetchData('https://restcountries.com/v2/all?fields=name,region,area');
         dispatch(setCountries(res));

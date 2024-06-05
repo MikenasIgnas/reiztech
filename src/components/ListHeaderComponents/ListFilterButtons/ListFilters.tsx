@@ -10,7 +10,7 @@ const ListFilters = () => {
   const dispatch                                            = useAppDispatch()
   const [isRegionFilterSelected, setIsRegionFilterSelected] = React.useState(false)
   const [isAreaFilterSelected, setIsAreaFilterSelected]     = React.useState(false)
-
+  
   const filterOceanianCountries = () => {
     handleFilterToggle(
       isRegionFilterSelected,
@@ -19,7 +19,7 @@ const ListFilters = () => {
       dispatch
     );
   };
-  
+
   const filterCountriesSmallerThanLithuania = () => {
     handleFilterToggle(
       isAreaFilterSelected,
@@ -32,10 +32,10 @@ const ListFilters = () => {
   return (
     <div className='FilterButtonsContainer'>
       <button onClick={filterOceanianCountries} className='Button'>
-        {isRegionFilterSelected ? 'Oceanian region countries' : 'All countries'}
+        {isRegionFilterSelected ? 'All countries' : 'Oceanian region countries'}
       </button>
       <button onClick={filterCountriesSmallerThanLithuania} className='Button'>
-        {isAreaFilterSelected ? 'Smaller than Lithuania by area ' : 'All countries'}
+        {isAreaFilterSelected ? 'All countries' : 'Smaller than Lithuania by area '}
       </button>
     </div>
   )
