@@ -11,10 +11,13 @@ const useFetchCountries = () => {
       const fetchCountries = async () => {
         try {
           setLoading(true)
-          const res = await fetchData('https://restcountries.com/v2/all?fields=name,region,area');
+          const res = await fetchData(`https://restcountries.com/v2/all?fields=name,region,area`);
           dispatch(setCountries(res))
           setLoading(false)
         } catch (error) {
+          if (error instanceof Error) {
+            alert('Failed to fetch data, please reload the page and try again')
+          }
         }
       };
   

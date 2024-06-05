@@ -1,4 +1,4 @@
-const fetchData = async (url: string, timeout: number = 5000) => {
+const fetchData = async (url: string, timeout: number = 20000) => {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout);
     const response = await fetch(url, {
