@@ -1,0 +1,28 @@
+.PageContainer{
+  width:            100%;
+  height:           100vh;
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+}
+
+.ListContainer{
+  width:              65%;
+  height:             90%;
+  padding:            20px;
+  background-color: #e3ffe3;
+}
+
+.HeaderButtonsContainer{
+  display:          flex;
+  justify-content:  space-between;
+  .FilterButtonsContainer{
+    display: flex;
+  }
+  .Button{
+    background-color: #8fff8f;
+    border:             none;
+    border-radius:      5px;
+    cursor:             pointer;
+  }
+}
