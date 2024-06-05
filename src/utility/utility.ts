@@ -2,6 +2,7 @@ import { Action }     from "redux";
 import { Dispatch }   from "react";
 import { 
   setCountries, 
+  setCountriesCount, 
   setLoading 
 }                     from "../reducers/countriesReducer";
 import { Countries }  from "../types/types";
@@ -29,7 +30,9 @@ const handleFilterToggle = async (
     isFilterSelected: boolean, 
     setFilterState:   (value: boolean) => void, 
     filterAction:     () => Action, 
-    dispatch:         Dispatch<Action>
+    dispatch:         Dispatch<Action>,
+    page:             number,
+    limit:            number,
   ) => {
     if (!isFilterSelected) {
       dispatch(filterAction());
@@ -38,7 +41,9 @@ const handleFilterToggle = async (
         dispatch(setLoading(true));
         // todo change back
         // const res = await fetchData('https://restcountries.com/v2/all?fields=name,region,area');
-        dispatch(setCountries(data));
+        const paginatedResults  = paginate(data, page, limit)
+        if(paginatedResults) dispatch(setCountries(paginatedResults))
+        dispatch(setCountriesCount(data.length))
         dispatch(setLoading(false));
       } catch (error) {
         if (error instanceof Error) {

@@ -37,10 +37,10 @@ const Pagination = () => {
     };
 
     return (
-    <div>
+    <div className='PaginationContainer'>
         <button onClick={handlePreviousPageChange}>-</button>
         {renderPaginationButtons()}
-        <label htmlFor="limit">Choose limit</label>
+        <label htmlFor="limit">Limit</label>
         <select name="limit" id="limi" onChange={(e) => handleLimitChange(e)}>
             <option value={10}>10</option>
             <option value={20}>20</option>

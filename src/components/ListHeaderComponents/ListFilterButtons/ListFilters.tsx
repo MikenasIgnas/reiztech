@@ -5,18 +5,22 @@ import {
 }                                   from "../../../reducers/countriesReducer"
 import { useAppDispatch }           from "../../../store/hooks"
 import { handleFilterToggle }       from "../../../utility/utility"
+import useGetUrlParams from "../../../coostomHooks/useGetUrlParams"
 
 const ListFilters = () => {
   const dispatch                                            = useAppDispatch()
   const [isRegionFilterSelected, setIsRegionFilterSelected] = React.useState(false)
   const [isAreaFilterSelected, setIsAreaFilterSelected]     = React.useState(false)
+  const {page, limit}                                       = useGetUrlParams()
   
   const filterOceanianCountries = () => {
     handleFilterToggle(
       isRegionFilterSelected,
       setIsRegionFilterSelected,
       setOceanianCountries,
-      dispatch
+      dispatch,
+      page,
+      limit,
     );
   };
 
@@ -25,7 +29,9 @@ const ListFilters = () => {
       isAreaFilterSelected,
       setIsAreaFilterSelected,
       setCountriesSmallerThanLithuania,
-      dispatch
+      dispatch,
+      page,
+      limit,
     );
   };
 

@@ -30,14 +30,14 @@ const countriesSlice = createSlice({
       state.loading = payload
     },
     setAscendingCountries(state) {
-      state.countries = [...state.countries].sort((a, b) => {
+      state.countries = state.countries.sort((a, b) => {
         if (a.name < b.name) return -1;
         if (a.name > b.name) return 1;
         return 0;
       });
     },
     setDescendingCountries(state) {
-      state.countries = [...state.countries].sort((a, b) => {
+      state.countries = state.countries.sort((a, b) => {
         if (a.name > b.name) return -1;
         if (a.name < b.name) return 1;
         return 0;
