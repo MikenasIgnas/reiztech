@@ -1,10 +1,9 @@
 import { Countries } from '../../../types/types'
-
 interface CountryListItemProps {
-    item: Countries
+  item: Countries
 }
 
-const CountryListItem = ({item}: CountryListItemProps) => {
+const CountryListItem = ({ item }: CountryListItemProps) => {
   return (
     <div className='CountryListItem'>
         <div>Country: {item.name}</div>

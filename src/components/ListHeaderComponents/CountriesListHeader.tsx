@@ -4,7 +4,7 @@ import ListSorters from "./ListSorterButtons/ListSorters"
 const CountriesListHeader = () => {
   return (
     <div>
-      <div>Countries List</div>
+      <div className="ListTitle">Reiz Tech - Countries List</div>
       <div className="HeaderButtonsContainer">
         <ListFilters/>
         <ListSorters/>
