@@ -1,24 +1,42 @@
+import React                        from "react"
 import { 
   setCountriesSmallerThanLithuania, 
   setOceanianCountries 
 }                                   from "../../../reducers/countriesReducer"
 import { useAppDispatch }           from "../../../store/hooks"
+import { handleFilterToggle }       from "../../../utility/utility"
 
 const ListFilters = () => {
-  const dispatch = useAppDispatch()
+  const dispatch                                            = useAppDispatch()
+  const [isRegionFilterSelected, setIsRegionFilterSelected] = React.useState(false)
+  const [isAreaFilterSelected, setIsAreaFilterSelected]     = React.useState(false)
   
   const filterOceanianCountries = () => {
-    dispatch(setOceanianCountries())
-  }
+    handleFilterToggle(
+      isRegionFilterSelected,
+      setIsRegionFilterSelected,
+      setOceanianCountries,
+      dispatch
+    );
+  };
 
-  const filterSmallerThanLithuania = () => {
-    dispatch(setCountriesSmallerThanLithuania())
-  }
+  const filterCountriesSmallerThanLithuania = () => {
+    handleFilterToggle(
+      isAreaFilterSelected,
+      setIsAreaFilterSelected,
+      setCountriesSmallerThanLithuania,
+      dispatch
+    );
+  };
 
   return (
     <div className='FilterButtonsContainer'>
-      <button onClick={filterOceanianCountries} className='Button'>filter1</button>
-      <button onClick={filterSmallerThanLithuania} className='Button'>filter2</button>
+      <button onClick={filterOceanianCountries} className='Button'>
+        {isRegionFilterSelected ? 'All countries' : 'Oceanian region countries'}
+      </button>
+      <button onClick={filterCountriesSmallerThanLithuania} className='Button'>
+        {isAreaFilterSelected ? 'All countries' : 'Smaller than Lithuania by area '}
+      </button>
     </div>
   )
 }
