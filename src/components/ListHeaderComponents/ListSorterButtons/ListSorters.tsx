@@ -10,18 +10,17 @@ const ListSorters = () => {
   const [orderAscending, setOrderAscending] = React.useState(false)
   
   const sortCountries = () => {
-    if(orderAscending){
+    if (orderAscending) {
       dispatch(setAscendingCountries())
-    }else{
+    } else {
       dispatch(setDescendingCountries())
     }
+    
     setOrderAscending(!orderAscending);
   }
 
   return (
-    <>
     <button onClick={sortCountries} className='Button'>{orderAscending ? 'Accending' : 'Decending'}</button>
-    </>
   )
 }
 

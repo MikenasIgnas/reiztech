@@ -5,18 +5,24 @@ import {
 import { Countries }    from '../types/types'
 
 interface countriesReducer {
-    countries: Countries[]
+  countries:  Countries[]
+  loading:    boolean
 }
 
 const initialState: countriesReducer = {
-  countries: [],
+  countries:  [],
+  loading:    false
 }
+
 const countriesSlice = createSlice({
   name:     'countries',
   initialState,
   reducers: {
     setCountries(state, { payload }: PayloadAction<Countries[]>) {
       state.countries = payload
+    },
+    setLoading(state, { payload } :PayloadAction<boolean>){
+      state.loading = payload
     },
     setAscendingCountries(state) {
       state.countries = [...state.countries].sort((a, b) => {
@@ -33,7 +39,8 @@ const countriesSlice = createSlice({
       });
     },
     setOceanianCountries(state){
-      state.countries = [...state.countries].filter((item) => item.region === 'Oceania')
+      const filterOceanianCountries =  state.countries.filter((item) => item.region === 'Oceania') 
+      state.countries = filterOceanianCountries
     },
     setCountriesSmallerThanLithuania(state){ 
       const lithuania = state.countries.find((item) => item.name === 'Lithuania')
@@ -46,6 +53,7 @@ const countriesSlice = createSlice({
 
 export const {
     setCountries,
+    setLoading,
     setAscendingCountries,
     setDescendingCountries,
     setOceanianCountries,

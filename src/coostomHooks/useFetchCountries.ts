@@ -1,19 +1,21 @@
 import React              from "react"
-import fetchData          from "../utility/utility"
+import { fetchData }      from "../utility/utility"
 import { useAppDispatch } from "../store/hooks"
-import { setCountries }   from "../reducers/countriesReducer"
+import { 
+  setCountries, 
+  setLoading 
+}                         from "../reducers/countriesReducer"
 
 const useFetchCountries = () => {
-    const [loading, setLoading] = React.useState(false)
     const dispatch              = useAppDispatch()
   
     React.useEffect(() => {
       const fetchCountries = async () => {
         try {
-          setLoading(true)
+          dispatch(setLoading(true))
           const res = await fetchData(`https://restcountries.com/v2/all?fields=name,region,area`);
           dispatch(setCountries(res))
-          setLoading(false)
+          dispatch(setLoading(false))
         } catch (error) {
           if (error instanceof Error) {
             alert('Failed to fetch data, please reload the page and try again')
@@ -24,7 +26,6 @@ const useFetchCountries = () => {
       fetchCountries();
     }, []);
 
-    return { loading }
 }
 
 export default useFetchCountries
