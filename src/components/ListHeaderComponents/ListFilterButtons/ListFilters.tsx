@@ -1,28 +1,35 @@
-import React            from "react";
 import useGetUrlParams  from "../../../customHooks/useGetUrlParams";
 
 const ListFilters = () => {
-  const { page, limit, setSearchParams }                    = useGetUrlParams();
-  const [isRegionFilterSelected, setIsRegionFilterSelected] = React.useState(false);
-  const [isAreaFilterSelected, setIsAreaFilterSelected]     = React.useState(false);
+  const { limit, areaFilter, regionFilter, setSearchParams } = useGetUrlParams();
 
   const toggleRegionFilter = () => {
-    setSearchParams(`page=1&limit=${limit}&regionFilter=${!isRegionFilterSelected}`);
-    setIsRegionFilterSelected(!isRegionFilterSelected);
+    let searchParams = `page=1&limit=${limit}&regionFilter=${regionFilter === 'true' ? 'false' : 'true'}`
+
+    if (areaFilter === 'true') {
+      searchParams += `&areaFilter=${areaFilter}`
+    }
+    
+    setSearchParams(searchParams);
   };
 
   const toggleAreaFilter = () => {
-    setSearchParams(`page=1&limit=${limit}&areaFilter=${!isAreaFilterSelected}`);
-    setIsAreaFilterSelected(!isAreaFilterSelected);
+    let searchParams = `page=1&limit=${limit}&areaFilter=${areaFilter === 'true' ? 'false' : 'true'}`
+    
+    if (regionFilter === 'true') {
+      searchParams += `&regionFilter=${regionFilter}`
+    } 
+    
+    setSearchParams(searchParams);
   };
-
+  
   return (
     <div className='FilterButtonsContainer'>
       <button onClick={toggleRegionFilter} className='Button'>
-        {isRegionFilterSelected ? 'All countries' : 'Oceanian region countries'}
+        {regionFilter === 'true' ? 'All countries' : 'Oceanian region countries'}
       </button>
       <button onClick={toggleAreaFilter} className='Button'>
-        {isAreaFilterSelected ? 'All countries' : 'Smaller than Lithuania by area '}
+        {areaFilter === 'true' ? 'All countries' : 'Smaller than Lithuania by area '}
       </button>
     </div>
   );

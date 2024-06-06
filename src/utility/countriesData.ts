@@ -1,6 +1,6 @@
 import { Countries } from "../types/types"
 
-const data: Countries[] = [
+const countriesData: Countries[] = [
     {
       name: "Afghanistan",
       region: "Asia",
@@ -1493,4 +1493,4 @@ const data: Countries[] = [
     }
   ]
 
-  export default data
+  export default countriesData

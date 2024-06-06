@@ -25,7 +25,7 @@
       }
     
       .FilterButtonsContainer{
-        width:            40%;
+        width:            300px;
         display:          flex;
         justify-content:  space-between;
       }
@@ -50,9 +50,19 @@
   .PaginationContainer{
     display:          flex;
     justify-content:  space-between;
+
   }
 }
 
+.PageButton{
+  background-color:#8fff8f;
+  border:            none;
+  border-radius:     5px;
+  height:            35px;
+  width:             130px;
+  margin:            10px;
+  cursor:            pointer;
+}
 
 .SpinnerContainer{
   width: 100%;

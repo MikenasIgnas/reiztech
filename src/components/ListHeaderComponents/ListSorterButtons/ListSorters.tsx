@@ -3,17 +3,21 @@ import {
   setAscendingCountries, 
   setDescendingCountries 
 }                           from "../../../reducers/countriesReducer"
-import { useAppDispatch }   from "../../../store/hooks"
+import { 
+  useAppDispatch, 
+  useAppSelector 
+}                           from "../../../store/hooks"
 
 const ListSorters = () => {
   const dispatch                            = useAppDispatch()
   const [orderAscending, setOrderAscending] = React.useState(false)
+  const countries                           = useAppSelector((state) => state.countries.countries)
   
   const sortCountries = () => {
     if (orderAscending) {
-      dispatch(setAscendingCountries())
+      dispatch(setAscendingCountries(countries))
     } else {
-      dispatch(setDescendingCountries())
+      dispatch(setDescendingCountries(countries))
     }
     
     setOrderAscending(!orderAscending);

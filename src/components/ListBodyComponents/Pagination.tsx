@@ -1,16 +1,18 @@
-import { useAppSelector }   from '../../store/hooks'
 import useGetUrlParams      from '../../customHooks/useGetUrlParams'
 
-const Pagination = () => {
+interface PaginationProps {
+    paginatedDataCount: number | undefined
+}
+
+const Pagination = ({ paginatedDataCount }: PaginationProps) => {
     const { 
         page, 
-        limit, 
+        limit,
         regionFilter, 
         areaFilter, 
         setSearchParams 
     }                       = useGetUrlParams()
-    const countriesCount    = useAppSelector((state) => state.countries.countriesCount)
-    const pagesCount        = Math.ceil(countriesCount / limit)
+    const pagesCount        = paginatedDataCount && Math.ceil(paginatedDataCount / limit)
 
     const handlePreviousPageChange = () => {
         if(page === 1) return
@@ -27,33 +29,39 @@ const Pagination = () => {
     }
     
     const handleLimitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setSearchParams(`?page=${page}&limit=${e.target.value}&regionFilter=${regionFilter}&areaFilter=${areaFilter}`)
+        setSearchParams(`?page=1&limit=${e.target.value}&regionFilter=${regionFilter}&areaFilter=${areaFilter}`)
     }
 
     const renderPaginationButtons = () => {
         const buttons = [];
-        for (let i = 1; i <= pagesCount; i++) {
-            buttons.push(
-                <button key={i} onClick={() => handlePageChange(i)} disabled={i === page}>
-                    {i}
-                </button>
-            );
+        if (pagesCount) {
+                for (let i = 1; i <= pagesCount; i++) {
+                    buttons.push(
+                        <button 
+                        style={{ backgroundColor: i === page ? '#31ef31' : '#8fff8f' }} 
+                        className='PageButton' 
+                        key={i} onClick={() => handlePageChange(i)} 
+                        disabled={i === page}
+                        >
+                        {i}
+                    </button>
+                );
+            }
+            return buttons;
         }
-        return buttons;
     };
 
     return (
     <div className='PaginationContainer'>
-        <button onClick={handlePreviousPageChange}>-</button>
+        <button className='PageButton' onClick={handlePreviousPageChange}>{'<'}</button>
         {renderPaginationButtons()}
-        <label htmlFor="limit">Limit</label>
         <select name="limit" id="limi" onChange={(e) => handleLimitChange(e)}>
             <option value={10}>10</option>
             <option value={20}>20</option>
             <option value={50}>50</option>
-            <option value={countriesCount}>{countriesCount}</option>
+            <option value={paginatedDataCount}>{paginatedDataCount}</option>
         </select>
-        <button onClick={handleNextsPageChange}>+</button>
+        <button className='PageButton' onClick={handleNextsPageChange}>{'>'}</button>
     </div>
   )
 }

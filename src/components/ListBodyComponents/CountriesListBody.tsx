@@ -1,14 +1,17 @@
+import { selectPages }    from "../../reducers/selectors"
 import { useAppSelector } from "../../store/hooks"
-
+import useGetUrlParams    from "../../customHooks/useGetUrlParams"
 import CountryListItem    from "./CountryListItem/CountryListItem"
 import Pagination         from "./Pagination"
 
 const CountriesListBody = () => {
-  const countries = useAppSelector((state) => state.countries.countries)
+  const { page, limit, areaFilter, regionFilter } = useGetUrlParams()
+  const {paginatedData, paginatedDataCount }      = useAppSelector((state) => selectPages(state, page, limit, regionFilter, areaFilter))
+  
   return (
     <>
-      {countries?.map((item, i) => <CountryListItem key={i} item={item}/>)}
-      <Pagination/>
+      {paginatedData?.map((item, i) => <CountryListItem key={i} item={item}/>)}
+      <Pagination paginatedDataCount={paginatedDataCount}/>
     </>
   )
 }
