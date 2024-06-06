@@ -1,44 +1,38 @@
-import React                        from "react"
-import { 
-  setCountriesSmallerThanLithuania, 
-  setOceanianCountries 
-}                                   from "../../../reducers/countriesReducer"
-import { useAppDispatch }           from "../../../store/hooks"
-import { handleFilterToggle }       from "../../../utility/utility"
+import useGetUrlParams  from "../../../customHooks/useGetUrlParams";
 
 const ListFilters = () => {
-  const dispatch                                            = useAppDispatch()
-  const [isRegionFilterSelected, setIsRegionFilterSelected] = React.useState(false)
-  const [isAreaFilterSelected, setIsAreaFilterSelected]     = React.useState(false)
+  const { limit, areaFilter, regionFilter, setSearchParams } = useGetUrlParams();
+
+  const toggleRegionFilter = () => {
+    let searchParams = `page=1&limit=${limit}&regionFilter=${regionFilter === 'true' ? 'false' : 'true'}`
+
+    if (areaFilter === 'true') {
+      searchParams += `&areaFilter=${areaFilter}`
+    }
+    
+    setSearchParams(searchParams);
+  };
+
+  const toggleAreaFilter = () => {
+    let searchParams = `page=1&limit=${limit}&areaFilter=${areaFilter === 'true' ? 'false' : 'true'}`
+    
+    if (regionFilter === 'true') {
+      searchParams += `&regionFilter=${regionFilter}`
+    } 
+    
+    setSearchParams(searchParams);
+  };
   
-  const filterOceanianCountries = () => {
-    handleFilterToggle(
-      isRegionFilterSelected,
-      setIsRegionFilterSelected,
-      setOceanianCountries,
-      dispatch
-    );
-  };
-
-  const filterCountriesSmallerThanLithuania = () => {
-    handleFilterToggle(
-      isAreaFilterSelected,
-      setIsAreaFilterSelected,
-      setCountriesSmallerThanLithuania,
-      dispatch
-    );
-  };
-
   return (
     <div className='FilterButtonsContainer'>
-      <button onClick={filterOceanianCountries} className='Button'>
-        {isRegionFilterSelected ? 'All countries' : 'Oceanian region countries'}
+      <button onClick={toggleRegionFilter} className='Button'>
+        {regionFilter === 'true' ? 'All countries' : 'Oceanian region countries'}
       </button>
-      <button onClick={filterCountriesSmallerThanLithuania} className='Button'>
-        {isAreaFilterSelected ? 'All countries' : 'Smaller than Lithuania by area '}
+      <button onClick={toggleAreaFilter} className='Button'>
+        {areaFilter === 'true' ? 'All countries' : 'Smaller than Lithuania by area '}
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default ListFilters
+export default ListFilters;

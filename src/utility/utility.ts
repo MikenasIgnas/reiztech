@@ -1,14 +1,9 @@
-import { Action }   from "redux";
-import { Dispatch } from "react";
-import { 
-  setCountries, 
-  setLoading 
-}                   from "../reducers/countriesReducer";
+import { Countries }  from "../types/types";
 
 const fetchData = async (url: string, timeout: number = 20000) => {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
-    const response = await fetch(url, {
+    const controller  = new AbortController();
+    const timeoutId   = setTimeout(() => controller.abort(), timeout);
+    const response    = await fetch(url, {
       method:  'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -23,28 +18,10 @@ const fetchData = async (url: string, timeout: number = 20000) => {
     }
 }
 
-const handleFilterToggle = async (
-    isFilterSelected: boolean, 
-    setFilterState:   (value: boolean) => void, 
-    filterAction:     () => Action, 
-    dispatch:         Dispatch<Action>
-  ) => {
-    if (!isFilterSelected) {
-      dispatch(filterAction());
-    } else {
-      try {
-        dispatch(setLoading(true));
-        const res = await fetchData('https://restcountries.com/v2/all?fields=name,region,area');
-        dispatch(setCountries(res));
-        dispatch(setLoading(false));
-      } catch (error) {
-        if (error instanceof Error) {
-          alert('Failed to fetch data, please reload the page and try again');
-        }
-      }
-    }
-    setFilterState(!isFilterSelected);
-};
+const paginate = (array: Countries[],  page: number | null, limit: number | null) => {
+  if(page && limit){
+    return array.slice((page - 1) * limit, page * limit);
+  }
+}
 
-
-export { fetchData, handleFilterToggle }
+export { fetchData, paginate }

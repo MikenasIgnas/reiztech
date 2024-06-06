@@ -1,19 +1,18 @@
 .PageContainer{
   width:            100%;
-  height:           100vh;
   display:          flex;
   align-items:      center;
   justify-content:  center;
 
   .ListContainer{
-    width:              65%;
+    width:              80%;
     height:             90%;
     padding:            20px;
     background-color: #e3ffe3;
 
     .ListTitle{
-      padding:          20px 0px 20px 0px;
-      font-size:        27px;
+      padding:    20px 0px 20px 0px;
+      font-size:  27px;
     }
 
     .HeaderButtonsContainer{
@@ -26,7 +25,7 @@
       }
     
       .FilterButtonsContainer{
-        width:            40%;
+        width:            300px;
         display:          flex;
         justify-content:  space-between;
       }
@@ -47,8 +46,23 @@
       margin-bottom:     10px;
     }
   }
+
+  .PaginationContainer{
+    display:          flex;
+    justify-content:  space-between;
+
+  }
 }
 
+.PageButton{
+  background-color:#8fff8f;
+  border:            none;
+  border-radius:     5px;
+  height:            35px;
+  width:             130px;
+  margin:            10px;
+  cursor:            pointer;
+}
 
 .SpinnerContainer{
   width: 100%;
