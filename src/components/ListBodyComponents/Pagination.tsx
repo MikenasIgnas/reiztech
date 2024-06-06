@@ -1,27 +1,33 @@
-import useGetUrlParams      from '../../coostomHooks/useGetUrlParams'
 import { useAppSelector }   from '../../store/hooks'
+import useGetUrlParams      from '../../customHooks/useGetUrlParams'
 
 const Pagination = () => {
-    const { page, limit, setSearchParams }  = useGetUrlParams()
-    const countriesCount                    = useAppSelector((state) => state.countries.countriesCount)
-    const pagesCount                        = countriesCount / limit
+    const { 
+        page, 
+        limit, 
+        regionFilter, 
+        areaFilter, 
+        setSearchParams 
+    }                       = useGetUrlParams()
+    const countriesCount    = useAppSelector((state) => state.countries.countriesCount)
+    const pagesCount        = Math.ceil(countriesCount / limit)
 
-    const handlePageChange  = (page: number) => {
-        setSearchParams(`?page=${page}&limit=${limit}`)
-    }
-    
     const handlePreviousPageChange = () => {
         if(page === 1) return
-        setSearchParams(`?page=${page - 1}&limit=${limit}`)
+        setSearchParams(`?page=${page - 1}&limit=${limit}&regionFilter=${regionFilter}&areaFilter=${areaFilter}`)
+    }
+    
+    const handlePageChange  = (page: number) => {
+        setSearchParams(`?page=${page}&limit=${limit}&regionFilter=${regionFilter}&areaFilter=${areaFilter}`)
     }
     
     const handleNextsPageChange = () => {
         if(page === pagesCount) return
-        setSearchParams(`?page=${page + 1}&limit=${limit}`)
+        setSearchParams(`?page=${page + 1}&limit=${limit}&regionFilter=${regionFilter}&areaFilter=${areaFilter}`)
     }
     
     const handleLimitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setSearchParams(`?page=${page}&limit=${e.target.value}`)
+        setSearchParams(`?page=${page}&limit=${e.target.value}&regionFilter=${regionFilter}&areaFilter=${areaFilter}`)
     }
 
     const renderPaginationButtons = () => {

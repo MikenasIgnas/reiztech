@@ -1,8 +1,8 @@
+import { Countries }    from '../types/types'
 import { 
   createSlice, 
   PayloadAction 
 }                       from '@reduxjs/toolkit'
-import { Countries }    from '../types/types'
 
 interface countriesReducer {
   countries:      Countries[]
@@ -43,16 +43,6 @@ const countriesSlice = createSlice({
         return 0;
       });
     },
-    setOceanianCountries(state){
-      const filterOceanianCountries =  state.countries.filter((item) => item.region === 'Oceania') 
-      state.countries = filterOceanianCountries
-    },
-    setCountriesSmallerThanLithuania(state){ 
-      const lithuania = state.countries.find((item) => item.name === 'Lithuania')
-      if(lithuania){
-        state.countries = state.countries.filter((item) => item.area < lithuania.area)
-      }
-    },
   },
 })
 
@@ -62,8 +52,6 @@ export const {
     setLoading,
     setAscendingCountries,
     setDescendingCountries,
-    setOceanianCountries,
-    setCountriesSmallerThanLithuania,
 } = countriesSlice.actions
 
 export default countriesSlice.reducer
