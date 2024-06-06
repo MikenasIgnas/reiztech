@@ -3,13 +3,13 @@ import ListSorters from "./ListSorterButtons/ListSorters"
 
 const CountriesListHeader = () => {
   return (
-    <div>
-      <div className="ListTitle">Reiz Tech - Countries List</div>
-      <div className="HeaderButtonsContainer">
-        <ListFilters/>
-        <ListSorters/>
-      </div>
-    </div>
+    <header>
+      <h1 className="ListTitle">Reiz Tech - Countries List</h1>
+      <nav className="HeaderButtonsContainer" aria-label="List Filters and Sorters">
+        <ListFilters />
+        <ListSorters />
+      </nav>
+    </header>
   )
 }
 

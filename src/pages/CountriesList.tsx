@@ -9,11 +9,11 @@ const CountriesList = () => {
   const loading = useAppSelector((state) => state.countries.loading)
 
   return (
-    <div className='PageContainer'>
-        <div className='ListContainer'>
-            <CountriesListHeader/>
-            { loading ? <Spinner/> : <CountriesListBody/> }
-        </div>
+    <div className='page-container'>
+      <main className='list-container'>
+        <CountriesListHeader />
+        {loading ? <Spinner /> : <CountriesListBody />}
+      </main>
     </div>
   )
 }
