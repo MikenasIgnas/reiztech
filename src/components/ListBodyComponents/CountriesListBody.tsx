@@ -6,13 +6,15 @@ import Pagination         from "./Pagination"
 
 const CountriesListBody = () => {
   const { page, limit, areaFilter, regionFilter } = useGetUrlParams()
-  const {paginatedData, paginatedDataCount }      = useAppSelector((state) => selectPages(state, page, limit, regionFilter, areaFilter))
-  
+  const { paginatedData, paginatedDataCount }     = useAppSelector((state) => selectPages(state, page, limit, regionFilter, areaFilter))
+
   return (
-    <>
-      {paginatedData?.map((item, i) => <CountryListItem key={i} item={item}/>)}
-      <Pagination paginatedDataCount={paginatedDataCount}/>
-    </>
+    <div>
+      <ul>
+        {paginatedData?.map((item, i) => <CountryListItem key={i} item={item} />)}
+      </ul>
+      <Pagination paginatedDataCount={paginatedDataCount} />
+    </div>
   )
 }
 

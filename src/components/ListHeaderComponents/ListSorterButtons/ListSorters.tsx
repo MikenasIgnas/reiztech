@@ -24,7 +24,7 @@ const ListSorters = () => {
   }
 
   return (
-    <button onClick={sortCountries} className='Button'>{orderAscending ? 'Accending' : 'Decending'}</button>
+    <button onClick={sortCountries} className='Button'>{orderAscending ? 'Ascending' : 'Descending'}</button>
   )
 }
 
