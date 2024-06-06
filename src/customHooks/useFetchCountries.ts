@@ -37,11 +37,11 @@ const useFetchCountries = () => {
       let filteredData = data;
 
       if (regionFilter && regionFilter === 'true') {
-        filteredData = filteredData.filter((el) => el.region === 'Oceania');
+        filteredData = filteredData.filter((item) => item.region === 'Oceania');
       }
 
       if (areaFilter && areaFilter === 'true') {
-        const findLithuania = data.find((el) => el.name === 'Lithuania');
+        const findLithuania = data.find((item) => item.name === 'Lithuania');
         if (findLithuania) {
           filteredData = filteredData.filter((item) => item.area < findLithuania.area);
         }

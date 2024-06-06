@@ -7,12 +7,12 @@ const ListFilters = () => {
   const [isAreaFilterSelected, setIsAreaFilterSelected]     = React.useState(false);
 
   const toggleRegionFilter = () => {
-    setSearchParams(`page=${page}&limit=${limit}&regionFilter=${!isRegionFilterSelected}`);
+    setSearchParams(`page=1&limit=${limit}&regionFilter=${!isRegionFilterSelected}`);
     setIsRegionFilterSelected(!isRegionFilterSelected);
   };
 
   const toggleAreaFilter = () => {
-    setSearchParams(`page=${page}&limit=${limit}&areaFilter=${!isAreaFilterSelected}`);
+    setSearchParams(`page=1&limit=${limit}&areaFilter=${!isAreaFilterSelected}`);
     setIsAreaFilterSelected(!isAreaFilterSelected);
   };
 
