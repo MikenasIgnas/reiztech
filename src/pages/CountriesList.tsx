@@ -9,8 +9,8 @@ const CountriesList = () => {
   const loading = useAppSelector((state) => state.countries.loading)
 
   return (
-    <div className='page-container'>
-      <main className='list-container'>
+    <div className='PageContainer'>
+      <main className='ListContainer'>
         <CountriesListHeader />
         {loading ? <Spinner /> : <CountriesListBody />}
       </main>
